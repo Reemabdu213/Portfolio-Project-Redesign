@@ -115,3 +115,66 @@
   outline: none;
   border-color: #ff9800;
 }
+
+/* ===== Home Redesign ===== */
+
+.redesign-hero {
+  min-height: 600px;
+  height: auto;
+  background: #f8fbff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 70px 8%;
+}
+
+.redesign-hero-text {
+  position: static;
+  background: transparent;
+  color: #2d3748;
+  max-width: 550px;
+}
+
+.redesign-hero-text h1 {
+  color: #2d3748;
+  font-size: 58px;
+  line-height: 1.2;
+}
+
+.redesign-hero-text p {
+  color: #6b7280;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: #fff3cd;
+  color: #ff8a00;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.redesign-hero-image-box {
+  position: relative;
+}
+
+.hero-blob {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  background: #ffe8c7;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.redesign-girl {
+  position: relative;
+  width: 420px;
+  height: auto;
+  object-fit: contain;
+  margin: 0;
+  z-index: 2;
+}
