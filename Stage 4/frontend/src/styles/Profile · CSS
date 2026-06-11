@@ -1,0 +1,205 @@
+/* =========================
+   PROFILE PAGE
+========================= */
+
+.clean-profile-page {
+  background: #fafafa;
+  min-height: 100vh;
+  padding: 50px 14%;
+}
+
+.clean-profile-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.profile-card,
+.bookings-card {
+  background: white;
+  border: 1px solid #eeeeee;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+.profile-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 1fr 170px;
+  align-items: center;
+  gap: 35px;
+  padding: 40px;
+}
+
+.profile-card h1 {
+  font-size: 30px;
+  color: #14213d;
+  margin: 0;
+}
+
+.profile-title {
+  margin-bottom: 25px;
+}
+
+.profile-title h1 {
+  font-size: 30px;
+  color: #14213d;
+  margin-bottom: 8px;
+}
+
+.profile-title p {
+  color: #6b7280;
+}
+
+.avatar-box {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: #fff0df;
+  color: #f15a24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-btn {
+  position: absolute;
+  right: 8px;
+  bottom: 12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profile-info {
+  width: 100%;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.info-row span {
+  color: #6b7280;
+}
+
+.info-row strong {
+  color: #1f2937;
+}
+
+.edit-profile-btn {
+  align-self: start;
+  justify-self: end;
+  border: 1px solid #ff6b00;
+  background: white;
+  color: #ff6b00;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bookings-header {
+  padding: 22px 28px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.bookings-header h2 {
+  color: #14213d;
+}
+
+.empty-box {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-icon {
+  font-size: 70px;
+  margin-bottom: 15px;
+}
+
+.empty-box h3 {
+  color: #14213d;
+  margin-bottom: 10px;
+}
+
+.empty-box p {
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.edit-profile-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.modal-buttons button {
+  flex: 1;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .clean-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
