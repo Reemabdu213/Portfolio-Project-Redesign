@@ -60,21 +60,26 @@ function Home() {
 
   return (
     <div className="home-page">
-      {/* Hero */}
       <section className="home-hero redesign-hero">
         <div className="hero-overlay redesign-hero-text">
           <span className="hero-badge">منصة تعليمية للأطفال</span>
 
-          <h1>اكتشف أفضل مراكز التعلم للأطفال</h1>
+          <h1>اكتشفي أفضل مراكز التعلم لطفلك</h1>
 
           <p>
             جيل يساعد الأهالي على إيجاد مراكز موثوقة، استكشاف الدورات،
             وقراءة التقييمات بسهولة.
           </p>
 
-          <button className="hero-btn" onClick={() => navigate("/search")}>
-            استكشف المراكز
-          </button>
+          <div className="hero-actions">
+            <button className="hero-btn" onClick={() => navigate("/search")}>
+              ابدأ الآن
+            </button>
+
+            <button className="hero-btn secondary" onClick={() => navigate("/search")}>
+              تصفح المراكز
+            </button>
+          </div>
         </div>
 
         <div className="redesign-hero-image-box">
@@ -87,7 +92,60 @@ function Home() {
         </div>
       </section>
 
-      {/* Search + Categories */}
+      <section className="why-section">
+        <div className="section-title">
+          <span>لماذا جيل؟</span>
+          <h2>كل ما يحتاجه الأهل في مكان واحد</h2>
+        </div>
+
+        <div className="why-grid">
+          <div className="why-card">
+            <div className="why-icon">🔍</div>
+            <h3>بحث أسهل</h3>
+            <p>ابحثي عن المراكز حسب المدينة، التصنيف، أو اسم المركز.</p>
+          </div>
+
+          <div className="why-card">
+            <div className="why-icon">✅</div>
+            <h3>مراكز موثوقة</h3>
+            <p>نعرض المراكز المعتمدة فقط بعد مراجعتها من الإدارة.</p>
+          </div>
+
+          <div className="why-card">
+            <div className="why-icon">⭐</div>
+            <h3>تقييمات واضحة</h3>
+            <p>اطلعي على آراء الأهالي قبل اختيار المركز المناسب.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="steps-section">
+        <div className="section-title">
+          <span>كيف يعمل؟</span>
+          <h2>اختاري المركز المناسب بثلاث خطوات</h2>
+        </div>
+
+        <div className="steps-grid">
+          <div className="step-card">
+            <strong>01</strong>
+            <h3>ابحثي</h3>
+            <p>اكتبي اسم المركز أو اختاري التصنيف المناسب لطفلك.</p>
+          </div>
+
+          <div className="step-card">
+            <strong>02</strong>
+            <h3>قارني</h3>
+            <p>راجعي التفاصيل، المدينة، الدورات، والتقييمات.</p>
+          </div>
+
+          <div className="step-card">
+            <strong>03</strong>
+            <h3>احجزي</h3>
+            <p>ابدئي بالتواصل مع المركز المناسب لطفلك بكل سهولة.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="featured-section">
         <h2>المراكز المميزة</h2>
 
@@ -99,7 +157,7 @@ function Home() {
                 className={`category-btn ${activeCategory === cat ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat)}
               >
-                {cat}
+                {cat === "All" ? "الكل" : cat}
               </button>
             ))}
           </div>
@@ -107,7 +165,7 @@ function Home() {
           <div className="search-box">
             <input
               type="text"
-              placeholder="ابحث عن مركز أو مدينة أو تصنيف..."
+              placeholder="ابحثي عن مركز أو مدينة أو تصنيف..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -127,6 +185,36 @@ function Home() {
           )}
         </div>
       </section>
+
+      <section className="reviews-section">
+        <div className="section-title">
+          <span>آراء الأهالي</span>
+          <h2>تجربة أسهل لاختيار مراكز الأطفال</h2>
+        </div>
+
+        <div className="reviews-grid">
+          <div className="review-card">
+            <p>“سهل علي البحث عن مركز قريب ومناسب لعمر طفلي.”</p>
+            <h4>أم خالد</h4>
+          </div>
+
+          <div className="review-card">
+            <p>“التصنيفات واضحة والتفاصيل ساعدتني أقرر بسرعة.”</p>
+            <h4>أم نورة</h4>
+          </div>
+
+          <div className="review-card">
+            <p>“فكرة جميلة تجمع المراكز التعليمية في مكان واحد.”</p>
+            <h4>أبو فيصل</h4>
+          </div>
+        </div>
+      </section>
+
+      <footer className="home-footer">
+        <h3>جيل</h3>
+        <p>منصة تساعد الأهالي على اكتشاف مراكز تعليمية موثوقة للأطفال.</p>
+        <span>© 2026 جميع الحقوق محفوظة</span>
+      </footer>
     </div>
   );
 }
