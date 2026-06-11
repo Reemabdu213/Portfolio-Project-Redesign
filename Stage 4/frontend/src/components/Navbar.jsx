@@ -1,40 +1,39 @@
-import React from 'react';
-import { Link } from "react-router-dom";
-import { FaHome, FaSearch, FaShieldAlt, FaBuilding, FaUser, FaKey, FaStar, FaSignOutAlt, FaSeedling } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaShieldAlt, FaBuilding, FaUser, FaKey, FaStar, FaSignOutAlt, FaSeedling } from 'react-icons/fa';
 
 function Navbar() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+  const role = user?.role;
+
+  const [showNavbar, setShowNavbar] = useState(true);
 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
-const [showNavbar, setShowNavbar] = useState(true);
 
   useEffect(() => {
-  let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+      lastScrollY = window.scrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-  const handleScroll = () => {
-    if (window.scrollY > lastScrollY) {
-      setShowNavbar(false);
-    } else {
-      setShowNavbar(true);
-    }
-
-    lastScrollY = window.scrollY;
-  };
-
-  window.addEventListener("scroll", handleScroll);
-
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
   return (
-    <nav className="navbar" dir="rtl">
+    <nav className="navbar" dir="rtl" style={{ top: showNavbar ? '0' : '-80px', transition: 'top 0.3s' }}>
       <div className="logo">
-        <FaSeedling style={{color: '#ff7a00', fontSize: '28px'}} />
+        <FaSeedling style={{ color: '#ff7a00', fontSize: '28px' }} />
         <h2 className="logo-text">جيل</h2>
       </div>
       <div className="nav-links">
@@ -54,7 +53,7 @@ const [showNavbar, setShowNavbar] = useState(true);
             <Link to="/register"><FaStar /> إنشاء حساب</Link>
           </>
         ) : (
-          <button onClick={handleLogout} style={{ marginTop: '0' }}>
+          <button onClick={handleLogout} className="logout-btn">
             <FaSignOutAlt /> تسجيل الخروج
           </button>
         )}
