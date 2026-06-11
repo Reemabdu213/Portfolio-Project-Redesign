@@ -1,0 +1,117 @@
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 80px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin-bottom: 40px;
+}
+
+.home-hero {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+  border-radius: 0 0 34px 34px;
+  margin-bottom: 40px;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20,35,55,0.72), rgba(20,35,55,0.25));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8%;
+}
+
+.hero-overlay h1 {
+  color: white;
+  font-size: 46px;
+  max-width: 650px;
+  margin-bottom: 18px;
+}
+
+.hero-overlay p {
+  font-size: 18px;
+  max-width: 620px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.hero-btn {
+  width: fit-content;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #ff9a32, #ff6500);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hero-content {
+  color: white;
+  max-width: 520px;
+  text-align: right;
+}
+
+.hero-content h1 {
+  color: white;
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.explore-btn {
+  background: white;
+  color: #3b5b7a;
+  padding: 13px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-bar-section {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.main-search-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 15px 24px;
+  border-radius: 30px;
+  border: 2px solid #ffe082;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.main-search-input:focus {
+  outline: none;
+  border-color: #ff9800;
+}
