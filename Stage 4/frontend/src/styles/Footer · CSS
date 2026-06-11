@@ -1,0 +1,10 @@
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  background: #f8fbff;
+  padding: 50px;
+  margin-top: 60px;
+  border-top: 1px solid #e2e8f0;
+}
