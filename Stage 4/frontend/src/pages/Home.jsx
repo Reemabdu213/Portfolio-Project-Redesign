@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api/axios";
 import heroImage from "../assets/girl-microscope.png";
-import "./HomeRedesign.css";
+
 
 function Home() {
   const [centers, setCenters] = useState([]);
