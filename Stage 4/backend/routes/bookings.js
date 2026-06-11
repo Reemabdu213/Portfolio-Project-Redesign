@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../config/db');
 const authMiddleware = require('../middleware/auth');
 
+// POST create booking
 router.post('/', authMiddleware, async (req, res) => {
   try {
     const { course_id, date } = req.body;
@@ -16,6 +17,7 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
+// GET bookings for current user (with course and center details)
 router.get('/me', authMiddleware, async (req, res) => {
   try {
     const result = await pool.query(
@@ -32,7 +34,7 @@ router.get('/me', authMiddleware, async (req, res) => {
   }
 });
 
-// Get all bookings (admin only)
+// GET all bookings (admin only)
 router.get('/all', authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== 'admin') {
@@ -51,7 +53,7 @@ router.get('/all', authMiddleware, async (req, res) => {
   }
 });
 
-// Get bookings for center
+// GET bookings for center owner
 router.get('/center', authMiddleware, async (req, res) => {
   try {
     const result = await pool.query(
@@ -64,6 +66,22 @@ router.get('/center', authMiddleware, async (req, res) => {
       [req.user.id]
     );
     res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// DELETE booking (user cancels their own booking)
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `DELETE FROM bookings WHERE id = $1 AND user_id = $2 RETURNING *`,
+      [req.params.id, req.user.id]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: 'Booking not found or not authorized' });
+    }
+    res.json({ message: 'Booking cancelled successfully' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
