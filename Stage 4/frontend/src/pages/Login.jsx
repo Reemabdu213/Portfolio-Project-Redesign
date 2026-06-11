@@ -17,73 +17,31 @@ const [showPassword, setShowPassword] = useState(false);
       const res = await API.post('/auth/login', { email, password });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
+      alert('تم تسجيل الدخول بنجاح');
       window.location.href = '/';
     } catch (err) {
-      setError('Invalid email or password');
-      setLoading(false);
+      setError('البريد الالكتروني او كلمة المرور غير صحيحة');
     }
   };
 
   return (
-  <div className="jeel-login-page">
-    <div className="jeel-login-left">
-      <div className="jeel-left-content">
-        <h1>Jeel</h1>
-        <p>Helping parents find
-the right center for
-their children's growth</p>
-      </div>
-    </div>
-
-    <div className="jeel-login-right">
-      <form className="jeel-login-form" onSubmit={handleSubmit}>
-<div className="jeel-logo">
-  <img src="/jeel-logo.png" alt="Jeel Logo" />
-</div>
-        <h2>مرحبا بعودتك 👋</h2>
-<p>يُرجى ادخال بيانتك  لتسجيل الدخول</p>
-
-        {error && <div className="login-error">{error}</div>}
-
-        <label>البريد الإلكتروني</label>
+    <div className="login-page">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>تسجيل الدخول</h2>
+        {error && <p style={{color: 'red'}}>{error}</p>}
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="البريد الالكتروني"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
-        <div className="password-container">
-  <input
-    type={showPassword ? "text" : "password"}
-    placeholder="Password"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-  />
-
-  <button
-    type="button"
-    className="password-toggle"
-    onClick={() => setShowPassword(!showPassword)}
-  >
-    {showPassword ? <FaEyeSlash /> : <FaEye />}
-  </button>
-</div>
-
-        <div className="login-options">
-          <label>
-            <input type="checkbox" /> تذكرني
-          </label>
-          <a href="#" dir="rtl">نسيت كلمة المرور?</a>
-        </div>
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Login"}
-        </button>
-
-        <p className="login-register">
-          ليس لديك حساب؟ <a href="/register" dir="rtl">انشاء حساب</a>
-        </p>
+        <input
+          type="password"
+          placeholder="كلمة المرور"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">تسجيل الدخول</button>
       </form>
     </div>
   </div>

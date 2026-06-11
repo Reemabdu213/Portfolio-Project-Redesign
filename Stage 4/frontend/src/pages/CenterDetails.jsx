@@ -12,14 +12,13 @@ function CenterDetails() {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [bookingDate, setBookingDate] = useState('');
-  const [bookingSuccess, setBookingSuccess] = useState('');
-  const [bookingError, setBookingError] = useState('');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const role = user.role;
 
   useEffect(() => {
+    // زيادة المشاهدات
+    API.patch(`/centers/${id}/view`).catch(() => {});
+
     API.get(`/centers/${id}`)
       .then(res => { setCenter(res.data); setLoading(false); })
       .catch(() => setLoading(false));
@@ -165,27 +164,36 @@ function CenterDetails() {
         </div>
       )}
 
-      {role === 'parent' && (
-        <div style={{background:'white', borderRadius:'20px', padding:'20px', border:'1px solid #d6e6f5', marginTop:'20px'}}>
-          <h3 style={{color:'#3b5b7a', marginBottom:'15px'}}>Add a Review</h3>
-          {success && <p style={{color:'green'}}>{success}</p>}
-          {error && <p style={{color:'red'}}>{error}</p>}
-          <form onSubmit={handleReview}>
-            <select value={rating} onChange={(e) => setRating(e.target.value)} style={{padding:'10px', borderRadius:'10px', border:'2px solid #ffe082', marginBottom:'10px', width:'100%'}}>
-              <option value="5">5 ⭐</option>
-              <option value="4">4 ⭐</option>
-              <option value="3">3 ⭐</option>
-              <option value="2">2 ⭐</option>
-              <option value="1">1 ⭐</option>
-            </select>
-            <textarea placeholder="Write your review..." value={comment} onChange={(e) => setComment(e.target.value)}
-              style={{width:'100%', padding:'10px', borderRadius:'10px', border:'2px solid #ffe082', marginBottom:'10px', height:'80px'}}/>
-            <button type="submit" style={{width:'100%'}}>Submit Review</button>
-          </form>
-        </div>
-      )}
-      {role === 'admin' && <p style={{color:'#ff6f00', fontWeight:'bold'}}>⚠️ Admins cannot add reviews</p>}
-      {role === 'center' && <p style={{color:'#ff6f00', fontWeight:'bold'}}>⚠️ Centers cannot add reviews</p>}
+        {role === 'parent' && (
+          <>
+            <h3>Add a Review</h3>
+            {success && <p style={{color: 'green'}}>{success}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
+            <form onSubmit={handleReview}>
+              <select value={rating} onChange={(e) => setRating(e.target.value)}>
+                <option value="5">5 ⭐</option>
+                <option value="4">4 ⭐</option>
+                <option value="3">3 ⭐</option>
+                <option value="2">2 ⭐</option>
+                <option value="1">1 ⭐</option>
+              </select>
+              <textarea
+                placeholder="Write your review..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <button type="submit">Submit Review</button>
+            </form>
+          </>
+        )}
+
+        {role === 'admin' && (
+          <p style={{color: '#ff6f00', fontWeight: 'bold'}}>⚠️ Admins cannot add reviews</p>
+        )}
+        {role === 'center' && (
+          <p style={{color: '#ff6f00', fontWeight: 'bold'}}>⚠️ Centers cannot add reviews</p>
+        )}
+      </div>
     </div>
   );
 }

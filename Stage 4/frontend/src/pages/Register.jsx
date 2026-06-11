@@ -25,27 +25,27 @@ function Register() {
     e.preventDefault();
     setLoading(true);
     if (password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError("كلمة المرور يجب أن تكون 8 أحرف على الأقل");
       setLoading(false);
       return;
     }
     if (!/[A-Z]/.test(password)) {
-      setError("Password must contain at least one uppercase letter");
+      setError("كلمة المرور يجب أن تحتوي على حرف كبير واحد على الأقل");
       setLoading(false);
       return;
     }
     if (!/[0-9]/.test(password)) {
-      setError("Password must contain at least one number");
+      setError("كلمة المرور يجب أن تحتوي على رقم واحد على الأقل");
       setLoading(false);
       return;
     }
     if (!/[!@#$%^&*]/.test(password)) {
-      setError("Password must contain at least one special character");
+      setError("كلمة المرور يجب أن تحتوي على رمز خاص واحد على الأقل");
       setLoading(false);
       return;
     }
     if (role === 'center' && (!centerName || !centerLocation || !centerActivities || !centerTrade)) {
-      setError("Please fill all center information");
+      setError("يرجى تعبئة جميع بيانات المركز");
       setLoading(false);
       return;
     }
@@ -65,7 +65,7 @@ function Register() {
         
         { headers: { Authorization: `Bearer ${token}` } });
         setLoading(false);
-        setSuccess("✅ تم إرسال طلب المركز بنجاح! سيتم مراجعته من قبل الإدارة.");
+        setSuccess("تم إرسال طلب المركز بنجاح! سيتم مراجعته من قبل الإدارة.");
         setTimeout(() => {
           window.location.href = '/login';
         }, 3000);
@@ -85,7 +85,7 @@ setSuccessMessage(
 {successMessage && (
   <div className="modal-overlay">
     <div className="edit-profile-modal">
-      <h2>تم التسجيل بنجاح ✅</h2>
+      <h2>تم التسجيل بنجاح</h2>
       <p>{successMessage}</p>
 
       <button
@@ -113,19 +113,19 @@ setSuccessMessage(
   return (
     <div className="register-page">
       <form className="register-form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <h2>إنشاء حساب</h2>
         {error && <p style={{color: 'red'}}>{error}</p>}
         {success && (
           <div style={{background:'#e8f5e9', color:'#2e7d32', padding:'14px 20px', borderRadius:'12px', marginBottom:'16px', border:'2px solid #a5d6a7', fontSize:'16px', fontWeight:'600'}}>
             {success}
           </div>
         )}
-        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="text" placeholder="الاسم" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input type="email" placeholder="البريد الالكتروني" value={email} onChange={(e) => setEmail(e.target.value)} required />
 <div className="password-container">
   <input
     type={showPassword ? "text" : "password"}
-    placeholder="Password"
+    placeholder="كلمة المرور"
     value={password}
     onChange={(e) => setPassword(e.target.value)}
   />
@@ -137,24 +137,25 @@ setSuccessMessage(
   >
     {showPassword ? <FaEyeSlash /> : <FaEye />}
   </button>
-</div>
+  <div className="select-container">
         <select value={role} onChange={(e) => setRole(e.target.value)} required>
-          <option value="">Select Account Type</option>
-          <option value="parent">Parent</option>
-          <option value="center">Center</option>
+          <option value="">نوع الحساب</option>
+          <option value="parent">ولي امر</option>
+          <option value="center">مركز</option>
         </select>
-
+      <span className="select-arrow">⌄</span>
+    </div>
         {role === 'center' && (
           <>
             <hr style={{margin: '15px 0', borderColor: '#ffe082'}} />
-            <h3 style={{color: '#3b5b7a', marginBottom: '10px'}}>🏫 Center Information</h3>
-            <input type="text" placeholder="Center Name *" value={centerName} onChange={(e) => setCenterName(e.target.value)} required />
-            <input type="text" placeholder="Location *" value={centerLocation} onChange={(e) => setCenterLocation(e.target.value)} required />
-            <input type="text" placeholder="Activities (e.g. Programming, Art) *" value={centerActivities} onChange={(e) => setCenterActivities(e.target.value)} required />
-            <input type="text" placeholder="Trade Number *" value={centerTrade} onChange={(e) => setCenterTrade(e.target.value)} required />
-            <input type="text" placeholder="License Number" value={centerLicense} onChange={(e) => setCenterLicense(e.target.value)} />
+            <h3 style={{color: '#3b5b7a', marginBottom: '10px'}}>بيانات المركز</h3>
+            <input type="text" placeholder="اسم المركز *" value={centerName} onChange={(e) => setCenterName(e.target.value)} required />
+            <input type="text" placeholder="الموقع *" value={centerLocation} onChange={(e) => setCenterLocation(e.target.value)} required />
+            <input type="text" placeholder="الأنشطة (مثال: برمجة، فنون) *" value={centerActivities} onChange={(e) => setCenterActivities(e.target.value)} required />
+            <input type="text" placeholder="رقم السجل التجاري *" value={centerTrade} onChange={(e) => setCenterTrade(e.target.value)} required />
+            <input type="text" placeholder="رقم الترخيص" value={centerLicense} onChange={(e) => setCenterLicense(e.target.value)} />
          <label className="upload-label">
-  Center Logo / Center Image
+   شعار المركز أو صورته 
 </label>
 
 <input
@@ -164,13 +165,13 @@ setSuccessMessage(
 />
 
 <small>
-  Upload a clear image for your center (JPG, PNG, WEBP)
+  ارفع صورة واضحة للمركز (JPG، PNG، WEBP)
 </small>
 
           </>
         )}
 
-        <button type="submit">Register</button>
+        <button type="submit">تسجيل</button>
       </form>
     </div>
   );

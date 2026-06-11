@@ -1,5 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import { Link } from "react-router-dom";
+import { FaHome, FaSearch, FaShieldAlt, FaBuilding, FaUser, FaKey, FaStar, FaSignOutAlt, FaSeedling } from 'react-icons/fa';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -31,31 +32,31 @@ const [showNavbar, setShowNavbar] = useState(true);
   };
 }, []);
   return (
-    <nav className="navbar">
-     <Link to="/" className="brand">
-    {/*<span className="logo-icon">🌱</span>*/}
-  <span className="logo-text">جيل</span>
-</Link>
-
+    <nav className="navbar" dir="rtl">
+      <div className="logo">
+        <FaSeedling style={{color: '#ff7a00', fontSize: '28px'}} />
+        <h2 className="logo-text">جيل</h2>
+      </div>
       <div className="nav-links">
-        <Link to="/">الصفحة الرئسية</Link>
-
-        {!user ? (
+        <Link to="/"><FaHome /> الرئيسية</Link>
+        {role && (
+          <Link to="/dashboard">
+            {role === 'admin'
+              ? <><FaShieldAlt /> لوحة التحكم</>
+              : role === 'center'
+              ? <><FaBuilding /> بوابة المركز</>
+              : <><FaUser /> حسابي</>}
+          </Link>
+        )}
+        {!role ? (
           <>
-            <Link to="/login">تسجيل الدخول</Link>
-            <Link to="/register" >
-              التسجيل
-            </Link>
+            <Link to="/login"><FaKey /> تسجيل الدخول</Link>
+            <Link to="/register"><FaStar /> إنشاء حساب</Link>
           </>
         ) : (
-          <>
-            {user.role === "parent" && <Link to="/profile">حسابي</Link>}
-            {user.role === "center" && <Link to="/my-center">مركزي</Link>}
-            {user.role === "admin" && <Link to="/dashboard">لوحة التحكم</Link>}
-            <button className="logout-btn" onClick={handleLogout}>
-              تسجيل الخروج
-            </button>
-          </>
+          <button onClick={handleLogout} style={{ marginTop: '0' }}>
+            <FaSignOutAlt /> تسجيل الخروج
+          </button>
         )}
       </div>
     </nav>
