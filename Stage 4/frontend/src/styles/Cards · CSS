@@ -1,0 +1,230 @@
+/* =========================
+   SEARCH PAGE
+========================= */
+
+.search-page {
+  min-height: 100vh;
+  padding: 50px 7%;
+  background: #f7f9fc;
+}
+
+.search-page h1 {
+  text-align: center;
+  font-size: 38px;
+  color: #3b5b7a;
+  margin-bottom: 30px;
+}
+
+.search-box {
+  max-width: 720px;
+  margin: 0 auto 40px;
+  display: flex;
+  gap: 12px;
+  background: white;
+  padding: 12px;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+}
+
+.search-box input {
+  flex: 1;
+  height: 52px;
+  border: 2px solid #f4d06f;
+  border-radius: 16px;
+  padding: 0 18px;
+  font-size: 16px;
+}
+
+.search-box button {
+  height: 52px;
+  padding: 0 28px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ff9a32, #ff6500);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* =========================
+   CATEGORIES & FILTERS
+========================= */
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px 20px;
+  background: white;
+  flex-wrap: wrap;
+}
+
+.categories button {
+  padding: 12px 26px;
+  border: 1px solid #f2d28a;
+  border-radius: 28px;
+  background: #fffaf0;
+  color: #3b5b7a;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.categories button:hover {
+  background: #ff7a00;
+  color: white;
+  border-color: #ff7a00;
+}
+
+.categories .active {
+  background: linear-gradient(135deg, #ff9a32, #ff6500);
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  padding-top: 40px;
+  margin-top: 25px;
+}
+
+.filter-btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  background: #f3f4f6;
+  color: #333;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #ff8c42;
+  color: white;
+}
+
+/* =========================
+   CENTER CARDS
+========================= */
+
+.card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.center-image-placeholder {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  font-size: 40px;
+}
+
+.center-details-image {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 22px;
+  margin-bottom: 25px;
+}
+
+.rating {
+  padding: 12px 18px 0;
+  color: #ff9800;
+  font-weight: 600;
+}
+
+.rating span {
+  color: #666;
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.card-content {
+  padding: 18px;
+}
+
+.card-content h2 {
+  font-size: 24px;
+  color: #2d3e50;
+  margin-bottom: 10px;
+}
+
+.location {
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.description {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.card-content button {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff9a32, #ff6500);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.center-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 25px 0;
+}
+
+.center-stat-card {
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+.center-stat-card svg {
+  font-size: 30px;
+  color: #ff7a00;
+}
+
+.center-stat-card h3 {
+  margin: 0;
+  font-size: 28px;
+  color: #14213d;
+}
+
+.center-stat-card p {
+  margin: 4px 0 0;
+  color: #6b7280;
+}
