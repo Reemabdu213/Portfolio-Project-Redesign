@@ -7,8 +7,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-const [showPassword, setShowPassword] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +20,7 @@ const [showPassword, setShowPassword] = useState(false);
       window.location.href = '/';
     } catch (err) {
       setError('البريد الالكتروني او كلمة المرور غير صحيحة');
+      setLoading(false);
     }
   };
 
@@ -28,25 +28,34 @@ const [showPassword, setShowPassword] = useState(false);
     <div className="login-page">
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>تسجيل الدخول</h2>
-        {error && <p style={{color: 'red'}}>{error}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <input
           type="email"
           placeholder="البريد الالكتروني"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="كلمة المرور"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">تسجيل الدخول</button>
+        <div className="password-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="كلمة المرور"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
+        <button type="submit" disabled={loading}>
+          {loading ? 'جاري التحميل...' : 'تسجيل الدخول'}
+        </button>
       </form>
     </div>
-  </div>
-);
-
+  );
 }
 
 export default Login;
