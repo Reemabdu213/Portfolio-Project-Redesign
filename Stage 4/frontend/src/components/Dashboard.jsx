@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../api/axios";
 import {
   FaShieldAlt, FaBuilding, FaCalendarAlt, FaBook,
@@ -29,31 +30,6 @@ function Dashboard() {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const role = user.role;
   const navigate = useNavigate();
-
-  const [activeSection, setActiveSection] = useState("home");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [loading, setLoading] = useState(true);
-
-  // ── بيانات المركز ──
-  const [center, setCenter] = useState(null);
-  const [courses, setCourses] = useState([]);
-  const [centerBookings, setCenterBookings] = useState([]);
-
-  // ── بيانات الأدمن ──
-  const [centers, setCenters] = useState([]);
-  const [allBookings, setAllBookings] = useState([]);
-  const [adminTab, setAdminTab] = useState("centers");
-
-  // ── فورم إضافة مركز ──
-  const [centerName, setCenterName] = useState("");
-  const [ownerName, setOwnerName] = useState("");
-  const [location, setLocation] = useState("");
-  const [activities, setActivities] = useState("");
-  const [tradeNumber, setTradeNumber] = useState("");
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-  const [license, setLicense] = useState(null);
-  const [centerSuccess, setCenterSuccess] = useState("");
 
   // ── فورم الدورات ──
   const [showCourseForm, setShowCourseForm] = useState(false);
@@ -105,7 +81,8 @@ function Dashboard() {
       setCenters(centers.map((c) => c.id === id ? { ...c, approved: true } : c));
     } catch (err) { console.error(err); }
   };
-  const handleDeleteCenter = async (id) => {
+
+  const handleDelete = async (id) => {
     try {
       await API.delete(`/centers/${id}`);
       setSuccess("تم حذف المركز بنجاح");
@@ -114,40 +91,43 @@ function Dashboard() {
   };
 
   const handleAddCenter = async (e) => {
-  e.preventDefault();
-  try {
-    let imageUrl = "";
-    let licenseUrl = "";
+    e.preventDefault();
+    try {
+      let imageUrl = "";
+      let licenseUrl = "";
 
-    if (image) {
-      const formData = new FormData();
-      formData.append("image", image);
-      const uploadRes = await API.post("/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      if (image) {
+        const formData = new FormData();
+        formData.append("image", image);
+        const uploadRes = await API.post("/upload", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        imageUrl = uploadRes.data.url;
+      }
+
+      if (licenseFile) {
+        const formData = new FormData();
+        formData.append("document", licenseFile);
+        const uploadRes = await API.post("/upload/document", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        licenseUrl = uploadRes.data.url;
+      }
+
+      await API.post("/centers", {
+        name, location, description,
+        image: imageUrl, license_file: licenseUrl, category
       });
-      imageUrl = uploadRes.data.url;
-    }
-
-    if (licenseFile) {
-      const formData = new FormData();
-      formData.append("document", licenseFile);
-      const uploadRes = await API.post("/upload/document", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      licenseUrl = uploadRes.data.url;
-    }
-
-    await API.post("/centers", { name, location, description, image: imageUrl, license_file: licenseUrl, category });
-    setSuccess("تم إرسال بيانات المركز بنجاح");
-    setShowForm(false);
-    setName(""); setLocation(""); setDescription("");
-    setImage(null); setLicenseFile(null); setCategory("");
-    if (role === "admin") {
-      const res = await API.get("/centers/all");
-      setCenters(res.data);
-    }
-  } catch (err) { console.error(err); }
-};
+      setSuccess("تم إرسال بيانات المركز بنجاح");
+      setShowForm(false);
+      setName(""); setLocation(""); setDescription("");
+      setImage(null); setLicenseFile(null); setCategory("");
+      if (role === "admin") {
+        const res = await API.get("/centers/all");
+        setCenters(res.data);
+      }
+    } catch (err) { console.error(err); }
+  };
 
   const getCenterBookingsCount = (center) =>
     bookings.filter((b) => b.center_name === center.name).length;
