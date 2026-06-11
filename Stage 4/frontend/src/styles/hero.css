@@ -170,6 +170,30 @@
   transform: translate(-50%, -50%);
 }
 
+@media (max-width: 900px) {
+  .redesign-hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .redesign-hero-text {
+    align-items: center;
+  }
+
+  .redesign-hero-text h1 {
+    font-size: 38px;
+  }
+
+  .redesign-girl {
+    width: 280px;
+  }
+
+  .hero-blob {
+    width: 300px;
+    height: 300px;
+  }
+}
 .redesign-girl {
   position: relative;
   width: 420px;
